@@ -17,13 +17,41 @@ const api = axios.create({
 });
 
 const cats = [
-  "Men's Wear",
-  "Women's Wear",
-  "Electronics",
-  "Gift Items",
-  "Kids Collections",
-  "Cookery Items",
-  "Bag Collections",
+  {
+    name: "Men's Wear",
+    icon: "👔",
+    subtitle: "Style for every occasion"
+  },
+  {
+    name: "Women's Wear",
+    icon: "👗",
+    subtitle: "Discover your style"
+  },
+  {
+    name: "Electronics",
+    icon: "🎧",
+    subtitle: "Smart tech essentials"
+  },
+  {
+    name: "Gift Items",
+    icon: "🎁",
+    subtitle: "Gifts for every moment"
+  },
+  {
+    name: "Kids Collections",
+    icon: "🧸",
+    subtitle: "Fun for little ones"
+  },
+  {
+    name: "Cookery Items",
+    icon: "🍳",
+    subtitle: "Everything for your kitchen"
+  },
+  {
+    name: "Bag Collections",
+    icon: "👜",
+    subtitle: "Carry your style"
+  }
 ];
 
 function getCartCount() {
@@ -179,53 +207,65 @@ function Auth({ title, subtitle, submit, form, setForm, link, text }) {
 function Home() {
   return (
     <Layout>
-      <section className="hero-section">
-        <div className="hero-content">
-          <span className="eyebrow">YOUR EVERYDAY SHOPPING DESTINATION</span>
-          <h1>Discover products you <span>love.</span></h1>
-          <p>Fashion, electronics, gifts and everyday essentials — all in one place.</p>
-          <Link className="primary-button hero-button" to="/products">
-            Shop Now <span>→</span>
-          </Link>
-          <div className="hero-highlights">
-            <span>✓ Curated products</span>
-            <span>✓ Easy shopping</span>
-            <span>✓ Secure checkout</span>
-          </div>
-        </div>
+      {/* Hero Banner */}
+      <section className="hero">
         <div className="hero-image-wrapper">
-          <img src="/images/hero-banner.png" alt="ShopSphere products" />
+          <img
+            src="/images/hero-banner.png"
+            alt="ShopSphere products"
+          />
+        </div>
+
+        <div className="hero-content">
+          <span className="hero-badge">✨ Explore Our Collection</span>
+
+          <h1>Discover products you love</h1>
+
+          <p>
+            Fashion, electronics, gifts and everyday essentials.
+          </p>
+
+          <Link className="button hero-button" to="/products">
+            Shop Now →
+          </Link>
         </div>
       </section>
 
-      <section className="category-section">
+      {/* Categories Section */}
+      <section className="categories-section">
         <div className="section-heading">
-          <span className="eyebrow">EXPLORE OUR COLLECTIONS</span>
+          <span className="section-label">EXPLORE OUR COLLECTION</span>
+
           <h2>Shop by Category</h2>
-          <p>Find something perfect for every style, need and occasion.</p>
+
+          <p>
+            Find everything you need in one place.
+          </p>
         </div>
 
         <div className="category-grid">
-          {cats.map((category, index) => (
+          {cats.map((category) => (
             <Link
-              key={category}
-              to={`/products?category=${encodeURIComponent(category)}`}
-              className={`category-card category-${index + 1}`}
+              key={category.name}
+              to={`/products?category=${encodeURIComponent(
+                category.name
+              )}`}
+              className="category-card"
             >
-              <span className="category-number">0{index + 1}</span>
-              <h3>{category}</h3>
-              <span className="category-link">Explore →</span>
+              <div className="category-icon">
+                {category.icon}
+              </div>
+
+              <h3>{category.name}</h3>
+
+              <p>{category.subtitle}</p>
+
+              <span className="category-link">
+                Explore →
+              </span>
             </Link>
           ))}
         </div>
-      </section>
-
-      <section className="home-bottom-banner">
-        <div>
-          <span className="eyebrow">READY TO EXPLORE?</span>
-          <h2>Your next favorite find is waiting.</h2>
-        </div>
-        <Link className="secondary-button" to="/products">View All Products →</Link>
       </section>
     </Layout>
   );
@@ -273,7 +313,11 @@ function Products() {
         />
         <select value={category} onChange={handleCategoryChange}>
           <option value="">All categories</option>
-          {cats.map((item) => <option key={item} value={item}>{item}</option>)}
+    {cats.map((c) => (
+  <option key={c.name} value={c.name}>
+    {c.name}
+  </option>
+))}
         </select>
       </div>
 
@@ -328,7 +372,6 @@ function Detail() {
 
     localStorage.setItem("cart", JSON.stringify(cart));
     notifyCartUpdated();
-    alert("Product added to cart");
   };
 
   return (
@@ -401,7 +444,6 @@ function Checkout() {
       });
       localStorage.removeItem("cart");
       notifyCartUpdated();
-      alert("Order placed successfully");
       nav("/orders");
     } catch (error) {
       alert(error.response?.data?.message || "Please login before checkout");

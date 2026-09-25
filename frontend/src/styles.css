@@ -2,7 +2,8 @@
 
 :root {
     font-family: 'DM Sans', sans-serif;
-    color: #172554;
+    /* color: #172554; */
+     color: blue;
     background: #f8f9ff;
     line-height: 1.5;
     font-synthesis: none;
@@ -89,7 +90,7 @@ button,
 .nav-logout {
     border: 0;
     background: transparent;
-    color: #172554;
+    color: blue;
     font-weight: 600;
     padding: 0;
 }
@@ -116,22 +117,30 @@ button,
     font-size: 13px;
 }
 
+/* =========================================
+   HERO SECTION
+========================================= */
+
 .hero-section {
     margin-top: 28px;
     display: grid;
-    grid-template-columns: .95fr 1.35fr;
-    min-height: 510px;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.35fr);
+    align-items: stretch;
     overflow: hidden;
     border-radius: 32px;
-    background: linear-gradient(135deg, #fff 0%, #f0edff 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f0edff 100%);
     box-shadow: 0 20px 60px rgba(43, 35, 112, .09);
 }
 
+/* Hero text/content area */
+
 .hero-content {
+    min-width: 0;
     padding: clamp(32px, 5vw, 70px);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f4f1ff 100%);
 }
 
 .eyebrow {
@@ -140,13 +149,7 @@ button,
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 1.6px;
-}
-
-h1,
-h2,
-h3,
-p {
-    margin-top: 0;
+    padding-top: 10px;
 }
 
 .hero-content h1 {
@@ -168,18 +171,25 @@ p {
     font-size: 17px;
 }
 
+/* Hero image: preserve the full image without cropping */
+
 .hero-image-wrapper {
-    min-height: 350px;
+    min-width: 0;
+    width: 100%;
     display: flex;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+    background: #f4f1ff;
 }
 
 .hero-image-wrapper img {
+    display: block;
     width: 100%;
-    height: 100%;
-    min-height: 350px;
-    object-fit: cover;
+    height: auto;
+    max-width: 100%;
+    min-height: 0;
+    object-fit: contain;
     object-position: center;
 }
 
@@ -224,7 +234,13 @@ p {
     font-weight: 600;
 }
 
-.category-section {
+/* =========================================
+   CATEGORY SECTION
+========================================= */
+
+.category-section,
+.categories-section {
+    width: 100%;
     padding: 80px 0 20px;
 }
 
@@ -240,6 +256,7 @@ p {
     font-family: 'Playfair Display', serif;
     font-size: clamp(32px, 4vw, 48px);
     letter-spacing: -1px;
+    color: #172554;
 }
 
 .section-heading p,
@@ -247,32 +264,78 @@ p {
     color: #64748b;
 }
 
+.section-label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #6654e8;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
 }
 
 .category-card {
-    min-height: 170px;
-    padding: 24px;
-    border-radius: 22px;
+    min-height: 245px;
+    padding: 28px 18px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid rgba(255, 255, 255, .8);
-    transition: transform .2s, box-shadow .2s;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #eeeaff;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #ffffff, #f8f7ff);
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(50, 40, 120, 0.06);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
 
 .category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(37, 44, 94, .12);
+    transform: translateY(-8px);
+    border-color: #c9c2ff;
+    box-shadow: 0 16px 35px rgba(80, 65, 180, 0.15);
+}
+
+.category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 92px;
+    height: 92px;
+    flex: 0 0 92px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+    font-size: 46px;
+    transition: transform .3s ease, background .3s ease;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.08) rotate(3deg);
+    background: linear-gradient(135deg, #ddd6fe, #c4b5fd);
 }
 
 .category-card h3 {
-    max-width: 140px;
-    font-size: 20px;
-    margin: 12px 0;
+    max-width: 100%;
+    margin: 0 0 8px;
+    color: #172554;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.category-card p {
+    min-height: 40px;
+    margin: 0 0 14px;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 .category-number {
@@ -282,37 +345,18 @@ p {
 }
 
 .category-link {
-    font-size: 12px;
-    font-weight: 800;
+    color: #6654e8;
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.category-1 {
-    background: #e9edff;
-}
-
-.category-2 {
-    background: #ffe9ed;
-}
-
-.category-3 {
-    background: #fff0d9;
-}
-
-.category-4 {
-    background: #e3f8f1;
-}
-
-.category-5 {
-    background: #f2eaff;
-}
-
-.category-6 {
-    background: #e5f4ff;
-}
-
-.category-7 {
-    background: #f1f4d9;
-}
+.category-1 { background: #e9edff; }
+.category-2 { background: #ffe9ed; }
+.category-3 { background: #fff0d9; }
+.category-4 { background: #e3f8f1; }
+.category-5 { background: #f2eaff; }
+.category-6 { background: #e5f4ff; }
+.category-7 { background: #f1f4d9; }
 
 .home-bottom-banner {
     margin: 60px 0 20px;
@@ -583,7 +627,14 @@ select:focus {
     }
 
     .hero-image-wrapper {
-        max-height: 350px;
+        max-height: none;
+    }
+
+    .hero-image-wrapper img {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        object-fit: contain;
     }
 
     .category-grid,
@@ -645,5 +696,38 @@ select:focus {
 
     .detail-content h1 {
         font-size: 35px;
+    }
+}
+
+@media (max-width: 768px) {
+    .category-card {
+        min-height: 220px;
+        padding: 22px 12px;
+        border-radius: 18px;
+    }
+
+    .category-icon {
+        width: 72px;
+        height: 72px;
+        flex-basis: 72px;
+        font-size: 36px;
+    }
+
+    .category-card h3 {
+        font-size: 14px;
+    }
+
+    .category-card p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card {
+        min-height: 200px;
     }
 }
