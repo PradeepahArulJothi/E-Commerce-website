@@ -205,10 +205,51 @@ function Auth({ title, subtitle, submit, form, setForm, link, text }) {
 }
 
 function Home() {
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+
+  useEffect(() => {
+    const loadFeaturedProducts = async () => {
+      try {
+        const response = await api.get("/products");
+
+        const productNames = [
+          "Classic Cotton Casual Shirt",
+          "Elegant Designer Saree",
+          "Smartphone Pro X",
+          "Cute Teddy Bear",
+          "Kids School Backpack",
+          "Non Stick Frying Pan",
+          "Premium Laptop Backpack",
+          "Wireless Bluetooth Headphones",
+        ];
+
+        const selectedProducts = productNames
+          .map((name) =>
+            response.data.find((product) => product.name === name)
+          )
+          .filter(Boolean);
+
+        setFeaturedProducts(selectedProducts);
+      } catch (error) {
+        console.error(
+          "Failed to load featured products:",
+          error
+        );
+      }
+    };
+
+    loadFeaturedProducts();
+  }, []);
+
   return (
     <Layout>
-      {/* Hero Banner */}
+
+      {/* =========================================
+          HERO SECTION
+      ========================================= */}
+
       <section className="hero">
+
         <div className="hero-image-wrapper">
           <img
             src="/images/hero-banner.png"
@@ -216,35 +257,117 @@ function Home() {
           />
         </div>
 
-        <div className="hero-content">
-          <span className="hero-badge">✨ Explore Our Collection</span>
-
-          <h1>Discover products you love</h1>
-
-          <p>
-            Fashion, electronics, gifts and everyday essentials.
-          </p>
-
-          <Link className="button hero-button" to="/products">
-            Shop Now →
-          </Link>
-        </div>
       </section>
 
-      {/* Categories Section */}
+      {/* =========================================
+    SHOPSPHERE BENEFITS
+========================================= */}
+
+<section className="shopping-benefits">
+
+  <div className="benefits-container">
+
+    <div className="benefit-card">
+
+      <div className="benefit-icon secure-icon">
+        🔒
+      </div>
+
+      <div className="benefit-content">
+        <h3>Secure Shopping</h3>
+
+        <p>
+          Shop with confidence with a safe and secure
+          shopping experience.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div className="benefit-card">
+
+      <div className="benefit-icon delivery-icon">
+        🚚
+      </div>
+
+      <div className="benefit-content">
+        <h3>Fast Delivery</h3>
+
+        <p>
+          Get your favorite products delivered quickly
+          and reliably.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div className="benefit-card">
+
+      <div className="benefit-icon payment-icon">
+        💳
+      </div>
+
+      <div className="benefit-content">
+        <h3>Easy Payments</h3>
+
+        <p>
+          Enjoy a simple and convenient checkout
+          experience.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div className="benefit-card">
+
+      <div className="benefit-icon quality-icon">
+        ⭐
+      </div>
+
+      <div className="benefit-content">
+        <h3>Quality Products</h3>
+
+        <p>
+          Discover carefully selected products for
+          everyday needs.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+      {/* =========================================
+          CATEGORIES
+      ========================================= */}
+
       <section className="categories-section">
+
         <div className="section-heading">
-          <span className="section-label">EXPLORE OUR COLLECTION</span>
+
+          <span className="section-label">
+            EXPLORE OUR COLLECTION
+          </span>
 
           <h2>Shop by Category</h2>
 
           <p>
             Find everything you need in one place.
           </p>
+
         </div>
 
+
         <div className="category-grid">
+
           {cats.map((category) => (
+
             <Link
               key={category.name}
               to={`/products?category=${encodeURIComponent(
@@ -252,21 +375,130 @@ function Home() {
               )}`}
               className="category-card"
             >
+
               <div className="category-icon">
                 {category.icon}
               </div>
 
-              <h3>{category.name}</h3>
+              <h3>
+                {category.name}
+              </h3>
 
-              <p>{category.subtitle}</p>
+              <p>
+                {category.subtitle}
+              </p>
 
               <span className="category-link">
                 Explore →
               </span>
+
             </Link>
+
           ))}
+
         </div>
+
       </section>
+
+
+      {/* =========================================
+          TOP SELLING PRODUCTS
+      ========================================= */}
+
+      <section className="top-products-section">
+
+        <div className="section-heading">
+
+          <span className="section-label">
+            CUSTOMER FAVORITES
+          </span>
+
+          <h2>Top Selling Products</h2>
+
+          <p>
+            Explore some of our most popular products.
+          </p>
+
+        </div>
+
+
+        <div className="top-products-grid">
+
+          {featuredProducts.map((product) => (
+
+            <article
+              className="top-product-card"
+              key={product._id}
+            >
+
+              <div className="top-product-image">
+
+                <img
+                  src={product.image}
+                  alt={product.name}
+                />
+
+                <span className="popular-badge">
+                  Popular
+                </span>
+
+              </div>
+
+
+              <div className="top-product-info">
+
+                <span className="product-category">
+                  {product.category}
+                </span>
+
+                <h3>
+                  {product.name}
+                </h3>
+
+                <p>
+                  {product.description}
+                </p>
+
+
+                <div className="top-product-bottom">
+
+                  <strong>
+                    ₹{product.price}
+                  </strong>
+
+                  <Link
+                    to={`/products/${product._id}`}
+                    className="view-product-button"
+                  >
+                    View →
+                  </Link>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          ))}
+
+        </div>
+
+
+        {/* View all products */}
+
+        <div className="view-all-products">
+
+          <Link
+            to="/products"
+            className="secondary-button"
+          >
+            View All Products →
+          </Link>
+
+        </div>
+
+      </section>
+
     </Layout>
   );
 }
@@ -347,43 +579,82 @@ function Products() {
 
 function Detail() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const [p, setP] = useState(null);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    api.get(`/products/${id}`).then((response) => setProduct(response.data));
+    api
+      .get("/products/" + id)
+      .then((r) => setP(r.data))
+      .catch((e) => {
+        console.error("Failed to load product:", e);
+      });
   }, [id]);
 
-  if (!product) return <Layout><p>Loading product...</p></Layout>;
+  if (!p) {
+    return <Layout>Loading...</Layout>;
+  }
 
-  const addToCart = () => {
+  const add = () => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const existing = cart.find((item) => item.productId === product._id);
 
-    if (existing) existing.quantity += 1;
-    else {
+    const old = cart.find((x) => x.productId === p._id);
+
+    if (old) {
+      old.quantity++;
+    } else {
       cart.push({
-        productId: product._id,
-        name: product.name,
-        price: product.price,
+        productId: p._id,
+        name: p.name,
+        price: p.price,
         quantity: 1,
-        image: product.image,
+        image: p.image,
       });
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    notifyCartUpdated();
+
+    // Update cart count in navbar
+    window.dispatchEvent(new Event("cartUpdated"));
+
+    // Show success message
+    setMessage("Added to cart ✓");
+
+    // Hide message after 2 seconds
+    setTimeout(() => {
+      setMessage("");
+    }, 2000);
   };
 
   return (
     <Layout>
       <div className="detail-card">
-        <img src={product.image} alt={product.name} />
+        <img src={p.image} alt={p.name} />
+
         <div className="detail-content">
-          <span className="product-category">{product.category}</span>
-          <h1>{product.name}</h1>
-          <p>{product.description}</p>
-          <h2>₹{product.price}</h2>
-          <button className="primary-button" onClick={addToCart}>Add to Cart</button>
+          <span className="product-category">
+            {p.category}
+          </span>
+
+          <h1>{p.name}</h1>
+
+          <p>{p.description}</p>
+
+          <h2>₹{p.price}</h2>
+
+          <button
+            className="primary-button"
+            onClick={add}
+          >
+            Add to Cart
+          </button>
+
+          {/* Success message */}
+          {message && (
+            <div className="cart-success-message">
+              ✓ {message}
+            </div>
+          )}
         </div>
       </div>
     </Layout>
@@ -391,39 +662,144 @@ function Detail() {
 }
 
 function Cart() {
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart") || "[]")
+  );
 
   const update = (index, quantity) => {
-    const next = cart.map((item, itemIndex) =>
-      itemIndex === index ? { ...item, quantity: Math.max(1, quantity) } : item
+    const next = cart.map((item, i) =>
+      i === index
+        ? {
+            ...item,
+            quantity: Math.max(1, quantity),
+          }
+        : item
     );
+
     setCart(next);
     localStorage.setItem("cart", JSON.stringify(next));
-    notifyCartUpdated();
+
+    // Update navbar cart count
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  const remove = (index) => {
-    const next = cart.filter((_, itemIndex) => itemIndex !== index);
+  const removeItem = (index) => {
+    const next = cart.filter((_, i) => i !== index);
+
     setCart(next);
     localStorage.setItem("cart", JSON.stringify(next));
-    notifyCartUpdated();
+
+    // Update navbar cart count
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  /* =========================================
+     EMPTY CART
+  ========================================= */
+
+  if (cart.length === 0) {
+    return (
+      <Layout>
+        <div className="empty-cart-page">
+          <div className="empty-cart-card">
+
+            <div className="empty-cart-icon">
+              <span>🛒</span>
+            </div>
+
+            <h1>Your Cart is Empty</h1>
+
+            <p>
+              Looks like you haven't added anything to your cart yet.
+              Start shopping and discover something you love!
+            </p>
+
+            <Link
+              to="/products"
+              className="primary-button empty-cart-button"
+            >
+              Continue Shopping →
+            </Link>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  /* =========================================
+     CART WITH PRODUCTS
+  ========================================= */
 
   return (
     <Layout>
-      <section className="listing-header"><span className="eyebrow">YOUR SELECTION</span><h1>Shopping Cart</h1></section>
+      <div className="listing-header">
+        <span className="eyebrow">YOUR SHOPPING BAG</span>
+
+        <h1>Shopping Cart</h1>
+
+        <p>
+          Review your items before proceeding to checkout.
+        </p>
+      </div>
+
       <div className="cart-card">
-        {cart.length === 0 ? <p className="empty-state">Your cart is empty.</p> : cart.map((item, index) => (
+
+        {cart.map((item, index) => (
           <div className="cart-row" key={item.productId}>
-            <div><strong>{item.name}</strong><p>₹{item.price} each</p></div>
-            <input type="number" min="1" value={item.quantity} onChange={(e) => update(index, Number(e.target.value))} />
-            <b>₹{item.price * item.quantity}</b>
-            <button className="danger-button" onClick={() => remove(index)}>Remove</button>
+
+            <div>
+              <strong>{item.name}</strong>
+
+              <p>
+                ₹{item.price} × {item.quantity}
+              </p>
+            </div>
+
+            <input
+              type="number"
+              min="1"
+              value={item.quantity}
+              onChange={(e) =>
+                update(index, Number(e.target.value))
+              }
+            />
+
+            <b>
+              ₹{item.price * item.quantity}
+            </b>
+
+            <button
+              className="danger-button"
+              onClick={() => removeItem(index)}
+            >
+              Remove
+            </button>
+
           </div>
         ))}
-        <div className="cart-summary"><h2>Total: ₹{total}</h2><Link className="primary-button" to="/checkout">Checkout</Link></div>
+
+        <div className="cart-summary">
+
+          <div>
+            <span>Total Amount</span>
+
+            <h2>₹{total}</h2>
+          </div>
+
+          <Link
+            className="primary-button"
+            to="/checkout"
+          >
+            Proceed to Checkout →
+          </Link>
+
+        </div>
+
       </div>
     </Layout>
   );

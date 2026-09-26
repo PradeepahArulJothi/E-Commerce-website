@@ -731,3 +731,696 @@ select:focus {
         min-height: 200px;
     }
 }
+
+/* =========================================
+   ADD TO CART SUCCESS MESSAGE
+========================================= */
+
+.cart-success-message {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 18px;
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+
+  color: #047857;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  animation: cartMessageIn 0.25s ease;
+}
+
+@keyframes cartMessageIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   EMPTY CART PAGE
+========================================= */
+
+.empty-cart-page {
+  min-height: 65vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 70px 20px;
+}
+
+/* Empty cart card */
+
+.empty-cart-card {
+  width: min(600px, 100%);
+
+  padding: 55px 40px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #f8f7ff 100%
+    );
+
+  border: 1px solid #e8e5ff;
+
+  border-radius: 30px;
+
+  box-shadow:
+    0 20px 60px rgba(43, 35, 112, 0.08);
+}
+
+/* Cart icon circle */
+
+.empty-cart-icon {
+  width: 110px;
+  height: 110px;
+
+  margin: 0 auto 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ede9fe,
+      #ddd6fe
+    );
+
+  box-shadow:
+    0 12px 30px rgba(99, 85, 239, 0.15);
+}
+
+/* Cart icon */
+
+.empty-cart-icon span {
+  font-size: 52px;
+
+  line-height: 1;
+
+  filter: drop-shadow(
+    0 4px 5px rgba(43, 35, 112, 0.12)
+  );
+}
+
+/* Heading */
+
+.empty-cart-card h1 {
+  margin: 0 0 14px;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 38px;
+
+  color: #172554;
+
+  letter-spacing: -1px;
+}
+
+/* Description */
+
+.empty-cart-card p {
+  max-width: 440px;
+
+  margin: 0 auto 30px;
+
+  color: #64748b;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+/* Continue Shopping button */
+
+.empty-cart-button {
+  margin-top: 5px;
+
+  text-decoration: none;
+
+  padding: 14px 26px;
+}
+
+/* =========================================
+   EMPTY CART RESPONSIVE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .empty-cart-page {
+    min-height: 60vh;
+
+    padding: 45px 16px;
+  }
+
+  .empty-cart-card {
+    padding: 42px 22px;
+
+    border-radius: 24px;
+  }
+
+  .empty-cart-icon {
+    width: 90px;
+    height: 90px;
+  }
+
+  .empty-cart-icon span {
+    font-size: 42px;
+  }
+
+  .empty-cart-card h1 {
+    font-size: 31px;
+  }
+
+  .empty-cart-card p {
+    font-size: 14px;
+  }
+
+  .empty-cart-button {
+    width: 100%;
+  }
+}
+
+/* =========================================
+   TOP SELLING PRODUCTS
+========================================= */
+
+.top-products-section {
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  padding: 70px 24px 90px;
+
+  box-sizing: border-box;
+}
+
+
+/* Product grid */
+
+.top-products-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 24px;
+
+  margin-top: 40px;
+}
+
+
+/* Product card */
+
+.top-product-card {
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeaff;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 25px rgba(50, 40, 120, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.top-product-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow:
+    0 18px 40px rgba(50, 40, 120, 0.13);
+}
+
+
+/* Product image */
+
+.top-product-image {
+  position: relative;
+
+  width: 100%;
+
+  height: 230px;
+
+  overflow: hidden;
+
+  background: #f8f7ff;
+}
+
+
+.top-product-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.4s ease;
+}
+
+
+.top-product-card:hover
+.top-product-image img {
+  transform: scale(1.05);
+}
+
+
+/* Popular badge */
+
+.popular-badge {
+  position: absolute;
+
+  top: 12px;
+  left: 12px;
+
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  color: #6352d9;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Product information */
+
+.top-product-info {
+  padding: 20px;
+}
+
+
+.product-category {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #7c6ee6;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+}
+
+
+.top-product-info h3 {
+  margin: 0 0 9px;
+
+  color: #172554;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  line-height: 1.35;
+}
+
+
+.top-product-info p {
+  display: -webkit-box;
+
+  margin: 0 0 18px;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  overflow: hidden;
+
+    /* The standard property for modern browser compatibility */
+  line-clamp: 2; 
+
+   /* Fallback for older browsers */
+  -webkit-line-clamp: 2;
+
+  -webkit-box-orient: vertical;
+}
+
+
+/* Price + View button */
+
+.top-product-bottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+
+.top-product-bottom strong {
+  color: #172554;
+
+  font-size: 20px;
+
+  font-weight: 800;
+}
+
+
+.view-product-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 9px 14px;
+
+  border-radius: 999px;
+
+  background: #f0edff;
+
+  color: #5b4bd8;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.view-product-button:hover {
+  background: #6352d9;
+
+  color: #ffffff;
+}
+
+
+/* View all button */
+
+.view-all-products {
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 45px;
+}
+
+
+.secondary-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 13px 25px;
+
+  border: 1px solid #d9d4ff;
+
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  color: #5b4bd8;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.secondary-button:hover {
+  background: #6352d9;
+
+  color: #ffffff;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   TOP PRODUCTS RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .top-products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .top-products-section {
+    padding: 55px 18px 70px;
+  }
+
+  .top-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+  }
+
+  .top-product-image {
+    height: 210px;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .top-products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top-product-image {
+    height: 240px;
+  }
+
+  .top-product-info {
+    padding: 18px;
+  }
+
+}
+
+/* =========================================
+   SHOPSPHERE SHOPPING BENEFITS
+========================================= */
+
+.shopping-benefits {
+  width: 100%;
+
+  padding: 38px 24px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border-top: 1px solid #f0effa;
+  border-bottom: 1px solid #f0effa;
+}
+
+
+/* Benefits container */
+
+.benefits-container {
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+
+/* Benefit card */
+
+.benefit-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 20px 18px;
+
+  background: linear-gradient(
+    145deg,
+    #ffffff,
+    #faf9ff
+  );
+
+  border: 1px solid #eeebff;
+
+  border-radius: 16px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #d9d3ff;
+
+  box-shadow:
+    0 12px 30px rgba(70, 55, 160, 0.09);
+}
+
+
+/* Benefit icon */
+
+.benefit-icon {
+  flex-shrink: 0;
+
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  font-size: 25px;
+
+  transition:
+    transform 0.25s ease;
+}
+
+
+.benefit-card:hover .benefit-icon {
+  transform: scale(1.08);
+}
+
+
+/* Individual icon backgrounds */
+
+.secure-icon {
+  background: #ede9fe;
+}
+
+.delivery-icon {
+  background: #e0f2fe;
+}
+
+.payment-icon {
+  background: #dcfce7;
+}
+
+.quality-icon {
+  background: #fef3c7;
+}
+
+
+/* Benefit text */
+
+.benefit-content h3 {
+  margin: 0 0 5px;
+
+  color: #172554;
+
+  font-size: 15px;
+
+  font-weight: 750;
+}
+
+
+.benefit-content p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   BENEFITS RESPONSIVE
+========================================= */
+
+@media (max-width: 1050px) {
+
+  .benefits-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .shopping-benefits {
+    padding: 28px 16px;
+  }
+
+  .benefits-container {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .benefit-card {
+    padding: 17px;
+  }
+
+}
