@@ -23,6 +23,14 @@ app.use(
 
 app.use(express.json());
 
+// Root route
+app.get("/", (_, res) => {
+  res.json({
+    status: "ok",
+    message: "E-Commerce API is running on Vercel",
+  });
+});
+
 // Health check
 app.get("/api/health", (_, res) => {
   res.json({
