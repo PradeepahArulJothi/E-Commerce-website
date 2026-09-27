@@ -121,6 +121,9 @@ button,
    HERO SECTION
 ========================================= */
 
+.hero{
+    margin-top: 35px;}
+
 .hero-section {
     margin-top: 28px;
     display: grid;
